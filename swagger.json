@@ -1,0 +1,81 @@
+{
+  "swagger": "2.0",
+  "title": "Survey Creator",
+  "paths": {
+    "/surveys": {
+      "post": {
+        "summary": "Creates a new survey",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string",
+                  "example": "Question 1"
+                },
+                "answers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["A", "B", "C", "D"]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/surveys/{surveyId}": {
+      "get": {
+        "summary": "Retrieves the result of a survey",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "surveyId"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Appends an answer to the survey",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "surveyId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "answer": {
+                  "type": "string",
+                  "example": "A"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
