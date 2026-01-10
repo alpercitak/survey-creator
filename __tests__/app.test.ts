@@ -1,6 +1,6 @@
 import { beforeAll, afterAll, describe, expect, it } from '@jest/globals';
 import { clearDataStore } from '../src/data';
-const request = require('supertest');
+import request from 'supertest';
 
 describe('app', () => {
   let server: any;

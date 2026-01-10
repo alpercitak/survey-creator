@@ -2,7 +2,7 @@ import express, { type Request, type Response } from 'express';
 import type { SurveyCreateDto, SurveyResult } from './types';
 import { surveysCreate, surveysGetResult, surveysAnswer } from './data';
 import swaggerUi from 'swagger-ui-express';
-const swaggerDocument = require('./swagger.json');
+import swaggerDocument from './swagger.json';
 
 const app = express();
 const port = 4001;
