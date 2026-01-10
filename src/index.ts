@@ -2,6 +2,7 @@ import express, { type Request, type Response } from 'express';
 import type { SurveyCreateDto, SurveyResult } from './types';
 import { surveysCreate, surveysGetResult, surveysAnswer } from './data';
 import swaggerUi from 'swagger-ui-express';
+const swaggerDocument = require('./swagger.json');
 
 const app = express();
 const port = 4001;
@@ -34,7 +35,6 @@ app.get('/surveys/:surveyId', async (req: Request, res: Response) => {
   return res.status(code).json(response).end();
 });
 
-const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const server = app.listen(port, () => {
