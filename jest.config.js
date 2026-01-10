@@ -3,8 +3,5 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverage: false,
-  watchPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/storage/',
-  ]
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/storage/'],
 };

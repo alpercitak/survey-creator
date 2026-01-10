@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:25-alpine AS base
 
 RUN npm i -g pnpm
 
@@ -21,4 +21,4 @@ FROM base AS deploy
 WORKDIR /app
 COPY --from=build /app/dist/ ./dist/
 COPY --from=build /app/node_modules ./node_modules
-CMD [ "node", "dist/app.js" ]
+CMD [ "node", "dist/index.js" ]
