@@ -10,7 +10,7 @@ const port = 4001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_: Request, res: Response) => {
   return res.status(200).json({ message: 'Hello World' }).end();
 });
 
