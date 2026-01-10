@@ -1,34 +1,34 @@
-import fs from 'fs';
-import path from 'path';
+import { existsSync, mkdirSync, readFileSync, rmdirSync, unlinkSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import type { DataStore, Survey, SurveyAnswerDto, SurveyCreateDto } from './types';
 
-const storageFolderPath = path.join(__dirname, 'storage');
-const storageFilePath = path.join(storageFolderPath, 'dataStore.json');
+const storageFolderPath = join(__dirname, 'storage');
+const storageFilePath = join(storageFolderPath, 'dataStore.json');
 
 const checkDataStoreFilePath = (): void => {
-  if (!fs.existsSync(storageFolderPath)) {
-    fs.mkdirSync(storageFolderPath);
+  if (!existsSync(storageFolderPath)) {
+    mkdirSync(storageFolderPath);
   }
-  if (!fs.existsSync(storageFilePath)) {
-    fs.writeFileSync(storageFilePath, JSON.stringify({ surveys: [] }, null, 2));
+  if (!existsSync(storageFilePath)) {
+    writeFileSync(storageFilePath, JSON.stringify({ surveys: [] }, null, 2));
   }
 };
 const getDataStore = (): DataStore => {
   checkDataStoreFilePath();
-  const file = fs.readFileSync(storageFilePath, 'utf-8');
+  const file = readFileSync(storageFilePath, 'utf-8');
   const contents = JSON.parse(file);
   return contents;
 };
 const setDataStore = (dataStore: DataStore): void => {
   checkDataStoreFilePath();
-  fs.writeFileSync(storageFilePath, JSON.stringify(dataStore, null, 2));
+  writeFileSync(storageFilePath, JSON.stringify(dataStore, null, 2));
 };
 export const clearDataStore = (): void => {
-  if (fs.existsSync(storageFilePath)) {
-    fs.unlinkSync(storageFilePath);
+  if (existsSync(storageFilePath)) {
+    unlinkSync(storageFilePath);
   }
-  if (fs.existsSync(storageFolderPath)) {
-    fs.rmdirSync(storageFolderPath);
+  if (existsSync(storageFolderPath)) {
+    rmdirSync(storageFolderPath);
   }
 };
 
