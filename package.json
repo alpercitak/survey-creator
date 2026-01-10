@@ -8,9 +8,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
-    "start": "pnpm build && node dist/index.js",
     "build": "rm -rf ./dist && tsc && cp src/swagger.json ./dist",
-    "serve": "pnpm build && node dist/index.js",
+    "start": "pnpm build && node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage"
