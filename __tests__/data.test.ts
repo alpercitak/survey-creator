@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from '@jest/globals';
-import { clearDataStore, Survey, surveysAnswer, surveysCreate, surveysGetResult } from '../data';
+import { clearDataStore, Survey, surveysAnswer, surveysCreate, surveysGetResult } from '../src/data';
 
 describe('surveysCreate', () => {
   beforeAll(() => {

@@ -2,10 +2,10 @@
   "name": "survey-creator",
   "version": "1.0.0",
   "description": "",
-  "main": "app.ts",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "start": "npm run build && node dist/app.js",
+    "start": "npm run build && node dist/index.js",
     "build": "npm run test && tsc && cp swagger.json ./dist",
     "test": "jest",
     "test:watch": "jest --watchAll",

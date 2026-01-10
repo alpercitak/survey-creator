@@ -1,12 +1,12 @@
 import { beforeAll, afterAll, describe, expect, it } from '@jest/globals';
-import { clearDataStore } from '../data';
+import { clearDataStore } from '../src/data';
 const request = require('supertest');
 
 describe('app', () => {
   let server: any;
   beforeAll(async () => {
     clearDataStore();
-    const mod = await import('../app');
+    const mod = await import('../src');
     server = (mod as any).default;
   });
 
