@@ -1,26 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-
-type DataStore = {
-  surveys: Survey[];
-};
-
-type Survey = {
-  surveyId: Number;
-  question: String;
-  answers: String[];
-  answersGiven: String[];
-};
-
-type SurveyCreateDto = Omit<Survey, 'surveyId' | 'answersGiven'>;
-
-type SurveyAnswerDto = {
-  answer: String;
-} & Pick<Survey, 'surveyId'>;
-
-type SurveyResult = {
-  answer: String;
-} & Pick<Survey, 'surveyId'>;
+import type { DataStore, Survey, SurveyAnswerDto, SurveyCreateDto } from './types';
 
 const storageFolderPath = path.join(__dirname, 'storage');
 const storageFilePath = path.join(storageFolderPath, 'dataStore.json');
@@ -43,7 +23,7 @@ const setDataStore = (dataStore: DataStore): void => {
   checkDataStoreFilePath();
   fs.writeFileSync(storageFilePath, JSON.stringify(dataStore, null, 2));
 };
-const clearDataStore = (): void => {
+export const clearDataStore = (): void => {
   if (fs.existsSync(storageFilePath)) {
     fs.unlinkSync(storageFilePath);
   }
@@ -52,7 +32,7 @@ const clearDataStore = (): void => {
   }
 };
 
-const surveysCreate = (data: SurveyCreateDto): Promise<any> => {
+export const surveysCreate = (data: SurveyCreateDto): Promise<any> => {
   const dataStore = getDataStore();
 
   return new Promise((resolve) => {
@@ -78,7 +58,7 @@ const surveysCreate = (data: SurveyCreateDto): Promise<any> => {
     return resolve({ surveyId: survey.surveyId });
   });
 };
-const surveysAnswer = ({ surveyId, answer }: SurveyAnswerDto): Promise<any> => {
+export const surveysAnswer = ({ surveyId, answer }: SurveyAnswerDto): Promise<any> => {
   const dataStore = getDataStore();
   const survey = dataStore.surveys.find((x) => x.surveyId == surveyId);
 
@@ -103,7 +83,7 @@ const surveysAnswer = ({ surveyId, answer }: SurveyAnswerDto): Promise<any> => {
     return resolve('ok');
   });
 };
-const surveysGetResult = (surveyId: Number): Promise<any> => {
+export const surveysGetResult = (surveyId: Number): Promise<any> => {
   const dataStore = getDataStore();
   const survey = dataStore.surveys.find((x) => x.surveyId == surveyId);
 
@@ -115,5 +95,3 @@ const surveysGetResult = (surveyId: Number): Promise<any> => {
     return resolve({ surveyId: surveyId, answersGiven: survey.answersGiven });
   });
 };
-
-export { surveysCreate, surveysAnswer, surveysGetResult, Survey, SurveyCreateDto, SurveyResult, clearDataStore };

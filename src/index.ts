@@ -1,5 +1,6 @@
 import express, { type Request, type Response } from 'express';
-import { surveysCreate, surveysGetResult, surveysAnswer, type SurveyCreateDto, type SurveyResult } from './data';
+import type { SurveyCreateDto, SurveyResult } from './types';
+import { surveysCreate, surveysGetResult, surveysAnswer } from './data';
 import swaggerUi from 'swagger-ui-express';
 
 const app = express();
@@ -19,7 +20,7 @@ app.post('/surveys', async (req: Request<{}, {}, SurveyCreateDto, {}>, res: Resp
   return res.status(code).json(response).end();
 });
 
-app.post('/surveys/:surveyId', async (req: Request<{ surveyId: Number }, {}, SurveyResult, {}>, res: Response) => {
+app.post('/surveys/:surveyId', async (req: Request<{ surveyId: number }, {}, SurveyResult, {}>, res: Response) => {
   const response = await surveysAnswer({ surveyId: req.params.surveyId, answer: req.body.answer });
   let code = 200;
   if (response && response.error) code = response.error.code;
