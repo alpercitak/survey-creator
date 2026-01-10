@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';
-import { surveysCreate, surveysGetResult, surveysAnswer, SurveyCreateDto, SurveyResult } from './data';
+import express, { type Request, type Response } from 'express';
+import { surveysCreate, surveysGetResult, surveysAnswer, type SurveyCreateDto, type SurveyResult } from './data';
 import swaggerUi from 'swagger-ui-express';
 
 const app = express();
@@ -37,7 +37,7 @@ const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const server = app.listen(port, () => {
-  console.log(`survey-creator started on ${new Date()}: ${port}`);
+  console.log(`survey-creator started on ${new Date()}: http://localhost:${port}`);
 });
 
 export default server;

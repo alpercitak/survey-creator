@@ -1,4 +1,4 @@
-import fs, { PathOrFileDescriptor } from 'fs';
+import fs from 'fs';
 import path from 'path';
 
 type DataStore = {
@@ -92,7 +92,9 @@ const surveysAnswer = ({ surveyId, answer }: SurveyAnswerDto): Promise<any> => {
     }
 
     if (!survey.answers.includes(answer)) {
-      return resolve({ error: { message: `Not found: answer: ${answer} in answers of surveyId: ${surveyId}`, code: 404 } });
+      return resolve({
+        error: { message: `Not found: answer: ${answer} in answers of surveyId: ${surveyId}`, code: 404 },
+      });
     }
 
     survey.answersGiven.push(answer);
