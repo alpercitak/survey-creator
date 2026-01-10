@@ -28,7 +28,7 @@ app.post('/surveys/:surveyId', async (req: Request<{ surveyId: number }, {}, Sur
   return res.status(code).json(response).end();
 });
 
-app.get('/surveys/:surveyId', async (req: Request, res: Response) => {
+app.get('/surveys/:surveyId', async (req: Request<{ surveyId: string }>, res: Response) => {
   const response = await surveysGetResult(parseInt(req.params.surveyId));
   let code = 200;
   if (response && response.error) code = response.error.code;

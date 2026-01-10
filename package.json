@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
     "start": "npm run build && node dist/index.js",
-    "build": "npm run test && tsc && cp swagger.json ./dist",
+    "build": "npm run test && tsc && cp src/swagger.json ./dist",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage"
